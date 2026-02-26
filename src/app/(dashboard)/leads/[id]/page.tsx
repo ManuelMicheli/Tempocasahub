@@ -10,6 +10,7 @@ import { LeadDetail } from '@/components/leads/lead-detail';
 import { DeleteLeadButton } from '@/components/leads/delete-lead-button';
 import { InteractionForm } from '@/components/interactions/interaction-form';
 import { InteractionTimeline } from '@/components/interactions/interaction-timeline';
+import { PostVisitForm } from '@/components/interactions/post-visit-form';
 import type { Lead, Interaction, Match, Property, MatchStatus } from '@/types/database';
 
 const MATCH_STATUS_CONFIG: Record<MatchStatus, { label: string; className: string }> = {
@@ -116,6 +117,42 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
           />
         </CardHeader>
         <CardContent>
+          {/* Post-visit feedback buttons for visits without outcome */}
+          {(() => {
+            const typedInteractions = (interactions as (Interaction & { property?: { address: string } | null })[]) ?? [];
+            const pendingVisits = typedInteractions.filter(
+              (i) => (i.type === 'visit' || i.type === 'meeting') && !i.outcome,
+            );
+            if (pendingVisits.length === 0) return null;
+            return (
+              <div className="mb-4 space-y-2">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                  Visite senza feedback
+                </p>
+                {pendingVisits.map((visit) => {
+                  const matchForVisit = visit.property_id
+                    ? leadMatches.find((m) => m.property_id === visit.property_id)
+                    : undefined;
+                  return (
+                    <div
+                      key={visit.id}
+                      className="flex flex-wrap items-center justify-between gap-2 rounded-lg border p-2"
+                    >
+                      <span className="text-sm">
+                        {visit.type === 'visit' ? 'Visita' : 'Incontro'}
+                        {visit.property?.address ? ` - ${visit.property.address}` : ''}
+                      </span>
+                      <PostVisitForm
+                        interactionId={visit.id}
+                        leadId={id}
+                        matchId={matchForVisit?.id}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
           <InteractionTimeline
             interactions={(interactions as (Interaction & { property?: { address: string } | null })[]) ?? []}
           />

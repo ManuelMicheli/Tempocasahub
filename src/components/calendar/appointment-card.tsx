@@ -9,6 +9,7 @@ import {
   Users,
   FileText,
   StickyNote,
+  ClipboardList,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import type { Interaction, InteractionType } from '@/types/database';
@@ -43,13 +44,19 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
     : '--:--';
 
   const leadHref = appointment.lead_id ? `/leads/${appointment.lead_id}` : '#';
+  const briefHref = `/calendar/${appointment.id}/brief`;
+
+  // Show brief link for visit/meeting types that are not yet completed
+  const showBriefLink =
+    (appointment.type === 'visit' || appointment.type === 'meeting') &&
+    !appointment.completed_at;
 
   if (compact) {
     return (
-      <Link href={leadHref}>
-        <div
-          className={`rounded-md border border-l-4 ${config.borderColor} bg-card p-2 text-xs hover:bg-accent transition-colors cursor-pointer`}
-        >
+      <div
+        className={`rounded-md border border-l-4 ${config.borderColor} bg-card p-2 text-xs`}
+      >
+        <Link href={leadHref} className="block hover:bg-accent transition-colors rounded-sm">
           <div className="flex items-center gap-1 font-medium">
             <span className="text-muted-foreground">{time}</span>
             <Icon className="h-3 w-3 shrink-0" />
@@ -60,16 +67,26 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
               {appointment.property.address}
             </p>
           )}
-        </div>
-      </Link>
+        </Link>
+        {showBriefLink && (
+          <Link
+            href={briefHref}
+            className="inline-flex items-center gap-1 mt-1 text-primary hover:underline text-[10px] font-medium"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ClipboardList className="h-2.5 w-2.5" />
+            Brief
+          </Link>
+        )}
+      </div>
     );
   }
 
   return (
-    <Link href={leadHref}>
-      <div
-        className={`rounded-md border border-l-4 ${config.borderColor} bg-card p-3 hover:bg-accent transition-colors cursor-pointer`}
-      >
+    <div
+      className={`rounded-md border border-l-4 ${config.borderColor} bg-card p-3`}
+    >
+      <Link href={leadHref} className="block hover:bg-accent transition-colors rounded-sm">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold text-muted-foreground">{time}</span>
           <Icon className="h-4 w-4 shrink-0" />
@@ -87,7 +104,17 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
             {appointment.summary}
           </p>
         )}
-      </div>
-    </Link>
+      </Link>
+      {showBriefLink && (
+        <Link
+          href={briefHref}
+          className="inline-flex items-center gap-1 mt-2 text-xs text-primary hover:underline font-medium"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <ClipboardList className="h-3 w-3" />
+          Vedi brief
+        </Link>
+      )}
+    </div>
   );
 }
