@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getCurrentAgent } from '@/lib/supabase/agent';
 import type { PropertyStatus } from '@/types/database';
+import { matchPropertyToLeads } from '@/lib/matching/run-matching';
 
 function parseArrayField(value: string | null): string[] | null {
   if (!value) return null;
@@ -64,6 +65,12 @@ export async function createProperty(formData: FormData) {
   if (error) return { error: error.message };
 
   revalidatePath('/properties');
+
+  // Trigger matching for available properties
+  if (data.status === 'available') {
+    await matchPropertyToLeads(data.id);
+  }
+
   redirect(`/properties/${data.id}`);
 }
 

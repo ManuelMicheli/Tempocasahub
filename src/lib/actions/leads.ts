@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getCurrentAgent } from '@/lib/supabase/agent';
 import type { LeadStatus } from '@/types/database';
+import { matchLeadToProperties } from '@/lib/matching/run-matching';
 
 function parseArrayField(value: string | null): string[] | null {
   if (!value) return null;
@@ -53,6 +54,12 @@ export async function createLead(formData: FormData) {
   if (error) return { error: error.message };
 
   revalidatePath('/leads');
+
+  // Trigger matching for buyer/both leads
+  if (data.type === 'buyer' || data.type === 'both') {
+    await matchLeadToProperties(data.id);
+  }
+
   redirect(`/leads/${data.id}`);
 }
 
