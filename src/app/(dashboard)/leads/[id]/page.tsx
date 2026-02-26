@@ -1,15 +1,40 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Pencil } from 'lucide-react';
+import { ArrowLeft, Pencil, ExternalLink } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { getCurrentAgent } from '@/lib/supabase/agent';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LeadDetail } from '@/components/leads/lead-detail';
 import { DeleteLeadButton } from '@/components/leads/delete-lead-button';
 import { InteractionForm } from '@/components/interactions/interaction-form';
 import { InteractionTimeline } from '@/components/interactions/interaction-timeline';
-import type { Lead, Interaction } from '@/types/database';
+import type { Lead, Interaction, Match, Property, MatchStatus } from '@/types/database';
+
+const MATCH_STATUS_CONFIG: Record<MatchStatus, { label: string; className: string }> = {
+  suggested: { label: 'Suggerito', className: 'bg-blue-100 text-blue-800 border-blue-200' },
+  sent: { label: 'Inviato', className: 'bg-purple-100 text-purple-800 border-purple-200' },
+  visit_booked: { label: 'Visita prenotata', className: 'bg-indigo-100 text-indigo-800 border-indigo-200' },
+  visited: { label: 'Visitato', className: 'bg-cyan-100 text-cyan-800 border-cyan-200' },
+  interested: { label: 'Interessato', className: 'bg-green-100 text-green-800 border-green-200' },
+  rejected: { label: 'Scartato', className: 'bg-red-100 text-red-800 border-red-200' },
+  proposal: { label: 'Proposta', className: 'bg-orange-100 text-orange-800 border-orange-200' },
+};
+
+function getScoreBadgeColor(score: number): string {
+  if (score >= 80) return 'bg-green-500 text-white';
+  if (score >= 60) return 'bg-yellow-500 text-white';
+  return 'bg-gray-400 text-white';
+}
+
+function formatPrice(price: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  }).format(price);
+}
 
 interface LeadDetailPageProps {
   params: Promise<{ id: string }>;
@@ -45,6 +70,15 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
     .select('id, title, address')
     .eq('agent_id', agent?.id ?? '')
     .order('address');
+
+  // Fetch matches for this lead
+  const { data: matchesData } = await supabase
+    .from('matches')
+    .select('*, property:properties(*)')
+    .eq('lead_id', id)
+    .order('score', { ascending: false });
+
+  const leadMatches = (matchesData as unknown as (Match & { property: Property })[]) ?? [];
 
   return (
     <div className="space-y-6">
@@ -88,15 +122,57 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
         </CardContent>
       </Card>
 
-      {/* Match - Placeholder */}
+      {/* Matched Properties */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Match</CardTitle>
+          <CardTitle className="text-lg">Match ({leadMatches.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">
-            I match verranno implementati prossimamente.
-          </p>
+          {leadMatches.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Nessun match trovato per questo lead.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {leadMatches.map((m) => {
+                const mStatus = MATCH_STATUS_CONFIG[m.status];
+                return (
+                  <div
+                    key={m.id}
+                    className="flex flex-wrap items-center justify-between gap-2 rounded-lg border p-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold ${getScoreBadgeColor(m.score)}`}
+                      >
+                        {m.score}
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium">
+                          {m.property?.address ?? 'Immobile sconosciuto'}
+                          {m.property?.city ? `, ${m.property.city}` : ''}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {m.property?.price != null ? formatPrice(m.property.price) : ''}
+                          {m.property?.sqm != null ? ` - ${m.property.sqm} mq` : ''}
+                          {m.property?.rooms != null ? ` - ${m.property.rooms} locali` : ''}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className={mStatus.className}>{mStatus.label}</Badge>
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/properties/${m.property_id}`}>
+                          <ExternalLink className="mr-1 h-3.5 w-3.5" />
+                          Vedi
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { getCurrentAgent } from '@/lib/supabase/agent';
+import { updateLeadScore } from '@/lib/scoring/update-score';
 
 export async function createInteraction(formData: FormData) {
   const supabase = await createClient();
@@ -29,6 +30,13 @@ export async function createInteraction(formData: FormData) {
     await supabase.from('leads').update({
       last_contact_at: new Date().toISOString(),
     }).eq('id', interaction.lead_id);
+  }
+
+  // Recalculate lead score after new interaction
+  try {
+    await updateLeadScore(interaction.lead_id);
+  } catch {
+    // Score update should not block main action
   }
 
   revalidatePath('/leads');
@@ -83,6 +91,13 @@ export async function completeInteraction(id: string, outcome: string, summary: 
     await supabase.from('leads').update({
       last_contact_at: new Date().toISOString(),
     }).eq('id', interaction.lead_id);
+
+    // Recalculate lead score after completing interaction
+    try {
+      await updateLeadScore(interaction.lead_id);
+    } catch {
+      // Score update should not block main action
+    }
   }
 
   revalidatePath('/calendar');

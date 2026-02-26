@@ -20,7 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { deleteProperty } from '@/lib/actions/properties';
-import type { Property } from '@/types/database';
+import type { Property, Match, Lead, MatchStatus } from '@/types/database';
 
 const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
   available: {
@@ -88,6 +88,22 @@ function formatPrice(price: number): string {
   }).format(price);
 }
 
+const MATCH_STATUS_CONFIG: Record<MatchStatus, { label: string; className: string }> = {
+  suggested: { label: 'Suggerito', className: 'bg-blue-100 text-blue-800 border-blue-200' },
+  sent: { label: 'Inviato', className: 'bg-purple-100 text-purple-800 border-purple-200' },
+  visit_booked: { label: 'Visita prenotata', className: 'bg-indigo-100 text-indigo-800 border-indigo-200' },
+  visited: { label: 'Visitato', className: 'bg-cyan-100 text-cyan-800 border-cyan-200' },
+  interested: { label: 'Interessato', className: 'bg-green-100 text-green-800 border-green-200' },
+  rejected: { label: 'Scartato', className: 'bg-red-100 text-red-800 border-red-200' },
+  proposal: { label: 'Proposta', className: 'bg-orange-100 text-orange-800 border-orange-200' },
+};
+
+function getScoreBadgeColor(score: number): string {
+  if (score >= 80) return 'bg-green-500 text-white';
+  if (score >= 60) return 'bg-yellow-500 text-white';
+  return 'bg-gray-400 text-white';
+}
+
 export default async function PropertyDetailPage({
   params,
 }: {
@@ -105,6 +121,15 @@ export default async function PropertyDetailPage({
   if (!data) notFound();
 
   const property = data as Property;
+
+  // Fetch matches for this property
+  const { data: matchesData } = await supabase
+    .from('matches')
+    .select('*, lead:leads(*)')
+    .eq('property_id', id)
+    .order('score', { ascending: false });
+
+  const propertyMatches = (matchesData as unknown as (Match & { lead: Lead })[]) ?? [];
   const statusConfig = STATUS_CONFIG[property.status] ?? STATUS_CONFIG.draft;
 
   async function handleDelete(): Promise<void> {
@@ -383,15 +408,56 @@ export default async function PropertyDetailPage({
 
       <Separator />
 
-      {/* Matches placeholder */}
-      <Card className="border-dashed">
+      {/* Matched Leads */}
+      <Card>
         <CardHeader>
-          <CardTitle>Match</CardTitle>
+          <CardTitle>Match ({propertyMatches.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">
-            I match verranno implementati prossimamente
-          </p>
+          {propertyMatches.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Nessun match trovato per questo immobile.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {propertyMatches.map((m) => {
+                const mStatus = MATCH_STATUS_CONFIG[m.status];
+                return (
+                  <div
+                    key={m.id}
+                    className="flex flex-wrap items-center justify-between gap-2 rounded-lg border p-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold ${getScoreBadgeColor(m.score)}`}
+                      >
+                        {m.score}
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium">
+                          {m.lead?.full_name ?? 'Lead sconosciuto'}
+                        </p>
+                        {m.lead?.search_zones && m.lead.search_zones.length > 0 && (
+                          <p className="text-xs text-muted-foreground">
+                            Zone: {m.lead.search_zones.join(', ')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className={mStatus.className}>{mStatus.label}</Badge>
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/leads/${m.lead_id}`}>
+                          <ExternalLink className="mr-1 h-3.5 w-3.5" />
+                          Vedi
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
