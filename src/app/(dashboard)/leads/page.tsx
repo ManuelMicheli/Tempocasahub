@@ -5,6 +5,8 @@ import { getCurrentAgent } from '@/lib/supabase/agent';
 import { Button } from '@/components/ui/button';
 import { LeadCard } from '@/components/leads/lead-card';
 import { LeadFilters } from '@/components/leads/lead-filters';
+import { LeadsViewToggle } from '@/components/leads/leads-view-toggle';
+import { KanbanBoard } from '@/components/leads/kanban-board';
 import type { Lead } from '@/types/database';
 
 interface LeadsPageProps {
@@ -13,6 +15,7 @@ interface LeadsPageProps {
     status?: string;
     temperature?: string;
     source?: string;
+    view?: string;
   }>;
 }
 
@@ -55,6 +58,8 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
   const { data: leads } = await query;
   const leadsList = (leads as Lead[]) || [];
 
+  const currentView = params.view || 'kanban';
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -65,19 +70,24 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
             {leadsList.length} {leadsList.length === 1 ? 'risultato' : 'risultati'}
           </p>
         </div>
-        <Button asChild>
-          <Link href="/leads/new">
-            <Plus className="h-4 w-4" />
-            Nuovo Lead
-          </Link>
-        </Button>
+        <div className="flex items-center gap-3">
+          <LeadsViewToggle />
+          <Button asChild>
+            <Link href="/leads/new">
+              <Plus className="h-4 w-4" />
+              Nuovo Lead
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Filters */}
       <LeadFilters />
 
-      {/* Grid */}
-      {leadsList.length > 0 ? (
+      {/* Content: Kanban or List view */}
+      {currentView === 'kanban' ? (
+        <KanbanBoard leads={leadsList} />
+      ) : leadsList.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {leadsList.map((lead) => (
             <LeadCard key={lead.id} lead={lead} />
