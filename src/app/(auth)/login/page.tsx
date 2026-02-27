@@ -35,10 +35,10 @@ export default function LoginPage() {
   }
 
   return (
-    <Card>
+    <Card className="glass-card border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
       <CardHeader>
-        <CardTitle className="text-xl">Accedi</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-2xl font-bold tracking-tight">Accedi</CardTitle>
+        <CardDescription className="text-muted-foreground">
           Inserisci le tue credenziali per accedere al CRM
         </CardDescription>
       </CardHeader>

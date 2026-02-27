@@ -9,8 +9,8 @@ interface UrgentLeadsProps {
 }
 
 const temperatureColors: Record<string, string> = {
-  hot: 'bg-red-500',
-  warm: 'bg-yellow-500',
+  hot: 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]',
+  warm: 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.6)]',
   cold: 'bg-gray-400',
 };
 
@@ -49,7 +49,7 @@ export function UrgentLeads({ leads }: UrgentLeadsProps) {
         return (
           <div
             key={lead.id}
-            className="flex items-center gap-3 rounded-md p-2 hover:bg-muted/50 transition-colors"
+            className="group flex items-center gap-3 rounded-md p-2 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors"
           >
             <span className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`} />
             <Link

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bell, User, ChevronRight } from 'lucide-react';
+import { Bell, User, Upload, MessageCircle, ChevronRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const settingsLinks = [
@@ -9,6 +9,20 @@ const settingsLinks = [
     title: 'Regole Follow-up',
     description:
       'Configura le regole automatiche di follow-up, template e coda messaggi',
+  },
+  {
+    href: '/settings/whatsapp',
+    icon: MessageCircle,
+    title: 'WhatsApp',
+    description:
+      'Collega il tuo WhatsApp per sincronizzare automaticamente le conversazioni con i lead',
+  },
+  {
+    href: '/settings/import',
+    icon: Upload,
+    title: 'Importa Dati',
+    description:
+      'Importa lead e immobili da file CSV, Excel o export da portali e gestionali',
   },
   {
     href: '/settings',

@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAgent } from '@/components/providers/agent-provider';
 import { logout } from '@/lib/supabase/auth-actions';
 import { MobileNav } from '@/components/mobile-nav';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function Header() {
   const agent = useAgent();
@@ -27,7 +28,7 @@ export function Header() {
     .slice(0, 2);
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:px-6">
+    <header className="flex h-14 items-center gap-4 border-b border-b-border/50 bg-background/60 backdrop-blur-xl px-4 lg:px-6 shadow-sm">
       {/* Left: hamburger (visible below lg) + title area */}
       <div className="flex items-center gap-2 lg:hidden">
         <MobileNav />
@@ -45,6 +46,9 @@ export function Header() {
           </span>
           <span className="sr-only">Notifiche</span>
         </Button>
+
+        {/* Theme Toggle */}
+        <ThemeToggle />
 
         {/* Avatar dropdown */}
         <DropdownMenu>

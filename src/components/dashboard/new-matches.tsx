@@ -14,10 +14,10 @@ interface NewMatchesProps {
 }
 
 function getScoreColor(score: number): string {
-  if (score >= 90) return 'bg-green-600 text-white';
-  if (score >= 80) return 'bg-green-500 text-white';
-  if (score >= 70) return 'bg-yellow-500 text-white';
-  return 'bg-gray-400 text-white';
+  if (score >= 90) return 'bg-primary text-primary-foreground shadow-[0_0_10px_rgba(0,166,80,0.5)]';
+  if (score >= 80) return 'bg-primary/80 text-primary-foreground';
+  if (score >= 70) return 'bg-yellow-500 text-primary-foreground';
+  return 'bg-muted text-muted-foreground';
 }
 
 function formatPrice(price: number): string {
@@ -43,7 +43,7 @@ export function NewMatches({ matches }: NewMatchesProps) {
         return (
           <div
             key={match.id}
-            className="flex items-center gap-3 rounded-md p-2 hover:bg-muted/50 transition-colors"
+            className="group flex items-center gap-3 rounded-md p-2 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors"
           >
             <Badge className={`shrink-0 ${scoreColor} border-0`}>
               {match.score}%

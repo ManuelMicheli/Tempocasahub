@@ -8,6 +8,7 @@ import {
   Building2,
   Zap,
   Calendar,
+  MapPin,
   Settings,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -20,6 +21,7 @@ const navItems = [
   { label: 'Immobili', href: '/properties', icon: Building2 },
   { label: 'Match', href: '/matches', icon: Zap },
   { label: 'Calendario', href: '/calendar', icon: Calendar },
+  { label: 'Censimento', href: '/censimento', icon: MapPin },
   { label: 'Impostazioni', href: '/settings', icon: Settings },
 ];
 
@@ -28,7 +30,7 @@ export function Sidebar() {
   const agent = useAgent();
 
   return (
-    <aside className="flex h-full w-[250px] flex-col border-r bg-background">
+    <aside className="flex h-full w-[250px] flex-col border-r border-r-border/50 bg-background/60 backdrop-blur-xl">
       {/* Logo / Brand */}
       <div className="flex h-14 items-center border-b px-6">
         <Link href="/" className="flex items-center gap-2">

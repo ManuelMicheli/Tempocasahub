@@ -24,9 +24,9 @@ interface TodayAgendaProps {
 }
 
 const priorityBorder: Record<AgendaItem['priority'], string> = {
-  high: 'border-l-red-500',
-  medium: 'border-l-yellow-500',
-  low: 'border-l-blue-500',
+  high: 'border-l-red-500 shadow-[[-2px_0_8px_rgba(239,68,68,0.2)]]',
+  medium: 'border-l-yellow-500 shadow-[[-2px_0_8px_rgba(234,179,8,0.2)]]',
+  low: 'border-l-primary shadow-[[-2px_0_8px_rgba(0,166,80,0.2)]]',
 };
 
 const typeIcons: Record<AgendaItem['type'], React.ElementType> = {
@@ -40,8 +40,8 @@ const typeIcons: Record<AgendaItem['type'], React.ElementType> = {
 const typeIconColors: Record<AgendaItem['type'], string> = {
   hot_lead: 'text-red-500',
   follow_up: 'text-yellow-600',
-  new_leads: 'text-blue-500',
-  appointment: 'text-blue-500',
+  new_leads: 'text-primary',
+  appointment: 'text-primary',
   mandate_expiry: 'text-amber-600',
 };
 
@@ -60,12 +60,12 @@ export function TodayAgenda({ items }: TodayAgendaProps) {
     <div className="space-y-3">
       {items.map((item, index) => {
         const Icon = typeIcons[item.type] || Clock;
-        const iconColor = typeIconColors[item.type] || 'text-gray-500';
+        const iconColor = typeIconColors[item.type] || 'text-muted-foreground';
 
         return (
           <div
             key={`${item.type}-${index}`}
-            className={`flex items-center gap-3 rounded-lg border-l-4 bg-muted/30 p-3 ${priorityBorder[item.priority]}`}
+            className={`group flex items-center gap-3 rounded-lg border-l-4 bg-gradient-to-r from-muted/40 to-transparent hover:from-muted/60 transition-all p-3 ${priorityBorder[item.priority]}`}
           >
             <div className="shrink-0">
               <Icon className={`h-5 w-5 ${iconColor}`} />

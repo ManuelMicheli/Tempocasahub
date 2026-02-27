@@ -289,9 +289,9 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">
+      <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+        <h1 className="text-3xl font-extrabold tracking-tight">Dashboard</h1>
+        <p className="text-muted-foreground mt-1">
           Oggi, {todayDateStr}
         </p>
       </div>
@@ -303,7 +303,7 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
         {/* Left Column: Today Agenda (~60%) */}
         <div className="lg:col-span-3">
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle>Oggi devi</CardTitle>
             </CardHeader>
@@ -315,7 +315,7 @@ export default async function DashboardPage() {
 
         {/* Right Column: Urgent Leads + New Matches (~40%) */}
         <div className="lg:col-span-2 space-y-6">
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle>Lead urgenti</CardTitle>
             </CardHeader>
@@ -324,7 +324,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle>Nuovi match</CardTitle>
             </CardHeader>
