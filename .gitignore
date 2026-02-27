@@ -38,3 +38,6 @@ next-env.d.ts
 
 # whatsapp bridge auth sessions
 .whatsapp-auth/
+
+.vercel
+.env*.local

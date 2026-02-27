@@ -22,16 +22,18 @@ export async function setupCornaredo(
   let agencyId = agentAgencyId;
 
   if (!agencyId) {
-    // Try to find an existing agency
-    const { data: existingAgencies } = await supabase
+    // Find the Tempo Casa Cornaredo agency (should always exist)
+    const { data: existingAgency } = await supabase
       .from('agencies')
       .select('id')
-      .limit(1);
+      .eq('city', 'Cornaredo')
+      .limit(1)
+      .single();
 
-    if (existingAgencies && existingAgencies.length > 0) {
-      agencyId = existingAgencies[0].id;
+    if (existingAgency) {
+      agencyId = existingAgency.id;
     } else {
-      // Create new agency
+      // Fallback: create agency if missing
       const { data: newAgency, error: agencyError } = await supabase
         .from('agencies')
         .insert({ name: 'Tempo Casa Cornaredo', city: 'Cornaredo' })
