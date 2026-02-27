@@ -66,7 +66,7 @@ export function PropertyFilters() {
   const hasFilters = searchParams.toString().length > 0;
 
   return (
-    <div className="flex flex-wrap items-end gap-3">
+    <div className="flex flex-wrap items-end gap-3 rounded-lg border bg-card/50 p-4">
       {/* Search */}
       <div className="w-full sm:w-auto sm:min-w-[220px]">
         <div className="relative">

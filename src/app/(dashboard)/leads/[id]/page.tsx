@@ -11,6 +11,7 @@ import { DeleteLeadButton } from '@/components/leads/delete-lead-button';
 import { InteractionForm } from '@/components/interactions/interaction-form';
 import { InteractionTimeline } from '@/components/interactions/interaction-timeline';
 import { PostVisitForm } from '@/components/interactions/post-visit-form';
+import { PageTransition } from '@/components/motion';
 import type { Lead, Interaction, Match, Property, MatchStatus } from '@/types/database';
 
 const MATCH_STATUS_CONFIG: Record<MatchStatus, { label: string; className: string }> = {
@@ -82,6 +83,7 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
   const leadMatches = (matchesData as unknown as (Match & { property: Property })[]) ?? [];
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -91,7 +93,7 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
-          <h1 className="text-2xl font-bold">{typedLead.full_name}</h1>
+          <h1 className="text-2xl font-bold font-display">{typedLead.full_name}</h1>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" asChild>
@@ -213,5 +215,6 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
         </CardContent>
       </Card>
     </div>
+    </PageTransition>
   );
 }

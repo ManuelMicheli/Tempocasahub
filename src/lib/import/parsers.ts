@@ -3,7 +3,6 @@
 // ============================================================
 
 import Papa from 'papaparse';
-import * as XLSX from 'xlsx';
 
 export interface ParseResult {
   headers: string[];
@@ -38,8 +37,9 @@ export function parseCSV(file: File): Promise<ParseResult> {
 export function parseExcel(file: File): Promise<ParseResult> {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
+        const XLSX = await import('xlsx');
         const data = e.target?.result;
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheet = workbook.SheetNames[0];

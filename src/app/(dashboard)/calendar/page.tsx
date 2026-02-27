@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { getCurrentAgent } from '@/lib/supabase/agent';
 import { CalendarView } from '@/components/calendar/calendar-view';
 import { NewAppointmentDialog } from '@/components/calendar/new-appointment-dialog';
+import { PageTransition } from '@/components/motion';
 
 export default async function CalendarPage() {
   const supabase = await createClient();
@@ -12,7 +13,8 @@ export default async function CalendarPage() {
     .from('interactions')
     .select('*, lead:leads(full_name), property:properties(address)')
     .not('scheduled_at', 'is', null)
-    .order('scheduled_at', { ascending: true });
+    .order('scheduled_at', { ascending: true })
+    .limit(200);
 
   // Fetch leads for the appointment dialog
   const { data: leads } = await supabase
@@ -29,9 +31,10 @@ export default async function CalendarPage() {
     .order('address');
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Calendario</h1>
+        <h1 className="text-2xl font-bold font-display">Calendario</h1>
         <NewAppointmentDialog
           leads={leads ?? []}
           properties={properties ?? []}
@@ -40,5 +43,6 @@ export default async function CalendarPage() {
 
       <CalendarView appointments={appointments ?? []} />
     </div>
+    </PageTransition>
   );
 }

@@ -73,7 +73,7 @@ export function InteractionTimeline({ interactions }: InteractionTimelineProps) 
             {/* Content */}
             <div className="flex-1 min-w-0 pt-0.5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-medium">{config.label}</span>
+                <span className="font-display text-sm font-medium">{config.label}</span>
                 {outcomeConfig && (
                   <Badge variant="outline" className={outcomeConfig.className}>
                     {outcomeConfig.label}

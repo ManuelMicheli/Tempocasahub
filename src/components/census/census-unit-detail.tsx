@@ -80,7 +80,7 @@ export function CensusUnitDetail({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle className="font-display flex items-center gap-2">
             {unit.internal || `Sub. ${unit.sub || '?'}`} — {fullAddress}
             <Badge variant="outline" className="ml-2 text-xs">
               {STATUS_LABELS[unit.contact_status]}
@@ -137,7 +137,7 @@ export function CensusUnitDetail({
 
             {!loading && transactions.length > 0 && (
               <div className="mt-4">
-                <h4 className="text-sm font-medium mb-2">Storico Compravendite</h4>
+                <h4 className="font-display text-sm font-medium mb-2">Storico Compravendite</h4>
                 <CensusTransactionList transactions={transactions} />
               </div>
             )}

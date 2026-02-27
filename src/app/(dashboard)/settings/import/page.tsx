@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { ImportWizard } from '@/components/import/import-wizard';
+import dynamic from 'next/dynamic';
+
+const ImportWizard = dynamic(() => import('@/components/import/import-wizard').then(m => m.ImportWizard), { ssr: false });
 
 export default function ImportPage() {
   return (
@@ -13,7 +15,7 @@ export default function ImportPage() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Importa Dati</h1>
+          <h1 className="font-display text-2xl font-bold">Importa Dati</h1>
           <p className="text-sm text-muted-foreground">
             Importa lead e immobili da file CSV o Excel
           </p>

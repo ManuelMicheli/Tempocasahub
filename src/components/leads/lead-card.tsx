@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { HoverScale } from '@/components/motion';
 import { formatRelative, daysSince } from '@/lib/date';
 import { AlertTriangle, Calendar } from 'lucide-react';
 import type { Lead } from '@/types/database';
@@ -67,12 +68,13 @@ export function LeadCard({ lead }: LeadCardProps) {
 
   return (
     <Link href={`/leads/${lead.id}`}>
+      <HoverScale>
       <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
               <span className={`inline-block w-2.5 h-2.5 rounded-full shrink-0 ${temp.color}`} />
-              <h3 className="font-semibold text-sm truncate">{lead.full_name}</h3>
+              <h3 className="font-semibold text-sm truncate font-display">{lead.full_name}</h3>
               {showWarning && (
                 <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
               )}
@@ -108,7 +110,7 @@ export function LeadCard({ lead }: LeadCardProps) {
           )}
 
           {budgetRange && (
-            <p className="text-xs font-medium">{budgetRange}</p>
+            <p className="text-xs font-medium font-mono-data">{budgetRange}</p>
           )}
 
           {visibleZones.length > 0 && (
@@ -127,6 +129,7 @@ export function LeadCard({ lead }: LeadCardProps) {
           )}
         </CardContent>
       </Card>
+      </HoverScale>
     </Link>
   );
 }

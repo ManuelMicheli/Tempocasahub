@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PropertyForm } from '@/components/properties/property-form';
 import { VoiceInput } from '@/components/ai/voice-input';
+import { PageTransition } from '@/components/motion';
 import type { Property } from '@/types/database';
 
 export default function NewPropertyPage() {
@@ -41,6 +42,7 @@ export default function NewPropertyPage() {
   };
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-3xl space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
@@ -49,7 +51,7 @@ export default function NewPropertyPage() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <h1 className="text-2xl font-bold">Nuovo Immobile</h1>
+        <h1 className="text-2xl font-bold font-display">Nuovo Immobile</h1>
       </div>
 
       {/* Voice/AI Input */}
@@ -72,5 +74,6 @@ export default function NewPropertyPage() {
         initialData={aiData as Property | undefined}
       />
     </div>
+    </PageTransition>
   );
 }

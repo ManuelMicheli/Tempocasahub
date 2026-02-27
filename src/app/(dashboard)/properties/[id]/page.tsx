@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { PageTransition } from '@/components/motion';
 import { deleteProperty } from '@/lib/actions/properties';
 import type { Property, Match, Lead, MatchStatus } from '@/types/database';
 
@@ -138,6 +139,7 @@ export default async function PropertyDetailPage({
   }
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-4xl space-y-6">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -148,7 +150,7 @@ export default async function PropertyDetailPage({
             </Link>
           </Button>
           <div>
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-2xl font-bold font-display">
               {property.title || property.address}
             </h1>
             <p className="text-sm text-muted-foreground">
@@ -197,7 +199,7 @@ export default async function PropertyDetailPage({
         <Badge className={`text-sm ${statusConfig.className}`}>
           {statusConfig.label}
         </Badge>
-        <span className="text-2xl font-bold text-primary">
+        <span className="text-2xl font-bold text-primary font-mono-data">
           {formatPrice(property.price)}
         </span>
         <span className="text-sm text-muted-foreground">
@@ -461,5 +463,6 @@ export default async function PropertyDetailPage({
         </CardContent>
       </Card>
     </div>
+    </PageTransition>
   );
 }

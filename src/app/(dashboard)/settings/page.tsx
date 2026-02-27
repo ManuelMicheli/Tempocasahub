@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Bell, User, Upload, MessageCircle, ChevronRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { PageTransition } from '@/components/motion';
 
 const settingsLinks = [
   {
@@ -35,9 +36,10 @@ const settingsLinks = [
 
 export default function SettingsPage() {
   return (
+    <PageTransition>
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Impostazioni</h1>
+        <h1 className="font-display text-2xl font-bold">Impostazioni</h1>
         <p className="text-sm text-muted-foreground">
           Gestisci le impostazioni del tuo account e le regole automatiche
         </p>
@@ -90,5 +92,6 @@ export default function SettingsPage() {
         })}
       </div>
     </div>
+    </PageTransition>
   );
 }

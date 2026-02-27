@@ -29,7 +29,7 @@ export function KanbanColumn({ status, title, leads, color }: KanbanColumnProps)
         style={{ borderTopColor: color }}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold">{title}</h3>
+          <h3 className="text-sm font-semibold font-display">{title}</h3>
           <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-5">
             {leads.length}
           </Badge>

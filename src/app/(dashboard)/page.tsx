@@ -7,6 +7,7 @@ import { KpiCards } from '@/components/dashboard/kpi-cards';
 import { TodayAgenda, type AgendaItem } from '@/components/dashboard/today-agenda';
 import { UrgentLeads } from '@/components/dashboard/urgent-leads';
 import { NewMatches } from '@/components/dashboard/new-matches';
+import { PageTransition } from '@/components/motion';
 import type { Lead } from '@/types/database';
 
 export default async function DashboardPage() {
@@ -287,10 +288,11 @@ export default async function DashboardPage() {
     .filter((m): m is NonNullable<typeof m> => m !== null);
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="animate-in fade-in slide-in-from-top-4 duration-500">
-        <h1 className="text-3xl font-extrabold tracking-tight">Dashboard</h1>
+      <div>
+        <h1 className="text-3xl font-extrabold tracking-tight font-display">Dashboard</h1>
         <p className="text-muted-foreground mt-1">
           Oggi, {todayDateStr}
         </p>
@@ -305,7 +307,7 @@ export default async function DashboardPage() {
         <div className="lg:col-span-3">
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle>Oggi devi</CardTitle>
+              <CardTitle className="font-display">Oggi devi</CardTitle>
             </CardHeader>
             <CardContent>
               <TodayAgenda items={agendaItems} />
@@ -317,7 +319,7 @@ export default async function DashboardPage() {
         <div className="lg:col-span-2 space-y-6">
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle>Lead urgenti</CardTitle>
+              <CardTitle className="font-display">Lead urgenti</CardTitle>
             </CardHeader>
             <CardContent>
               <UrgentLeads leads={urgentLeads} />
@@ -326,7 +328,7 @@ export default async function DashboardPage() {
 
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle>Nuovi match</CardTitle>
+              <CardTitle className="font-display">Nuovi match</CardTitle>
             </CardHeader>
             <CardContent>
               <NewMatches matches={newMatchesList} />
@@ -335,5 +337,6 @@ export default async function DashboardPage() {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 }

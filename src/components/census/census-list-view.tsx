@@ -1,5 +1,6 @@
 'use client';
 
+import { StaggerContainer, StaggerItem } from '@/components/motion';
 import { CensusBuildingRow } from './census-building-row';
 import type { CensusBuilding, CensusUnit, CensusOwner } from '@/types/database';
 
@@ -29,12 +30,13 @@ export function CensusListView({ buildings, unitsByBuilding, ownersByUnit }: Cen
   const sortedStreets = Array.from(byStreet.keys()).sort();
 
   return (
-    <div className="space-y-4">
+    <StaggerContainer className="space-y-4">
       {sortedStreets.map((street) => {
         const streetBuildings = byStreet.get(street)!;
         return (
-          <div key={street} className="space-y-2">
-            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+          <StaggerItem key={street}>
+          <div className="space-y-2">
+            <h3 className="font-display text-sm font-semibold text-muted-foreground uppercase tracking-wide">
               {street}
             </h3>
             <div className="space-y-1">
@@ -48,8 +50,9 @@ export function CensusListView({ buildings, unitsByBuilding, ownersByUnit }: Cen
               ))}
             </div>
           </div>
+          </StaggerItem>
         );
       })}
-    </div>
+    </StaggerContainer>
   );
 }

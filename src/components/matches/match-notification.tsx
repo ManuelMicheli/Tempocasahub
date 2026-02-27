@@ -51,9 +51,9 @@ export function MatchNotification({ match }: MatchNotificationProps) {
   return (
     <Card className="border-l-4 border-l-primary">
       <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-base">
+        <CardTitle className="flex items-center gap-2 text-base font-display">
           <span>NUOVO MATCH</span>
-          <span className={`font-bold ${getScoreColor(score)}`}>
+          <span className={`font-bold font-mono-data ${getScoreColor(score)}`}>
             (Score: {score}/100)
           </span>
         </CardTitle>

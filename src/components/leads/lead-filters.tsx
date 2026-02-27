@@ -68,7 +68,7 @@ export function LeadFilters() {
   );
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap items-end gap-3">
       <Input
         placeholder="Cerca per nome, telefono, email..."
         defaultValue={currentSearch}

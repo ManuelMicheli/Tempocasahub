@@ -77,7 +77,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       <Card>
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-xl font-bold tracking-tight">
+            <CardTitle className="font-display text-xl font-bold tracking-tight">
               BRIEF APPUNTAMENTO
             </CardTitle>
             <div className="text-sm text-muted-foreground">
@@ -100,7 +100,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       {/* Client Section */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="font-display text-base flex items-center gap-2">
             <User className="h-4 w-4" />
             Cliente
           </CardTitle>
@@ -174,7 +174,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       {/* Interaction History */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="font-display text-base flex items-center gap-2">
             <History className="h-4 w-4" />
             Storico interazioni ({interactions.length})
           </CardTitle>
@@ -229,7 +229,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       {property && (
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-base flex items-center gap-2">
+            <CardTitle className="font-display text-base flex items-center gap-2">
               <Home className="h-4 w-4" />
               Immobile
             </CardTitle>
@@ -339,7 +339,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
               <>
                 <Separator />
                 <div>
-                  <h4 className="text-sm font-semibold text-green-700 mb-2 flex items-center gap-1">
+                  <h4 className="font-display text-sm font-semibold text-green-700 mb-2 flex items-center gap-1">
                     <CheckCircle2 className="h-4 w-4" />
                     Punti di forza da evidenziare
                   </h4>
@@ -363,7 +363,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
               <>
                 <Separator />
                 <div>
-                  <h4 className="text-sm font-semibold text-amber-700 mb-2 flex items-center gap-1">
+                  <h4 className="font-display text-sm font-semibold text-amber-700 mb-2 flex items-center gap-1">
                     <AlertTriangle className="h-4 w-4" />
                     Possibili obiezioni
                   </h4>
@@ -388,7 +388,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       {/* AI Suggestions */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="font-display text-base flex items-center gap-2">
             <Sparkles className="h-4 w-4" />
             Suggerimenti AI
           </CardTitle>
@@ -403,7 +403,7 @@ export function AppointmentBrief({ brief }: AppointmentBriefProps) {
       {/* Post-visit actions checklist */}
       <Card className="print:break-before-avoid">
         <CardHeader className="pb-2">
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="font-display text-base flex items-center gap-2">
             <ClipboardList className="h-4 w-4" />
             Azioni post-visita
           </CardTitle>

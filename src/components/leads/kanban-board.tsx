@@ -174,7 +174,7 @@ export function KanbanBoard({ leads }: KanbanBoardProps) {
             ) : (
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             )}
-            <span className="text-sm font-semibold">Lead Dormienti</span>
+            <span className="text-sm font-semibold font-display">Lead Dormienti</span>
             <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-5">
               {dormantLeads.length}
             </Badge>

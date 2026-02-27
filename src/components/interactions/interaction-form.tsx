@@ -102,7 +102,7 @@ export function InteractionForm({ leadId, properties, onSuccess }: InteractionFo
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Nuova interazione</DialogTitle>
+          <DialogTitle className="font-display">Nuova interazione</DialogTitle>
           <DialogDescription>
             Registra una nuova interazione con il lead.
           </DialogDescription>

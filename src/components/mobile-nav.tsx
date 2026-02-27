@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, LayoutDashboard, Users, Building2, Zap, Calendar, Settings } from 'lucide-react';
+import { Menu, LayoutDashboard, Users, Building2, Zap, Calendar, MapPin, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,7 @@ const navItems = [
   { label: 'Immobili', href: '/properties', icon: Building2 },
   { label: 'Match', href: '/matches', icon: Zap },
   { label: 'Calendario', href: '/calendar', icon: Calendar },
+  { label: 'Censimento', href: '/censimento', icon: MapPin },
   { label: 'Impostazioni', href: '/settings', icon: Settings },
 ];
 
@@ -38,10 +39,12 @@ export function MobileNav() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="flex w-[280px] flex-col p-0">
-          <SheetHeader className="border-b px-6 py-4">
-            <SheetTitle className="flex items-center gap-2 text-left">
-              <Building2 className="h-5 w-5 text-primary" />
-              TempoCasa
+          <SheetHeader className="border-b border-border/50 px-6 py-4">
+            <SheetTitle className="flex items-center gap-3 text-left">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 border border-primary/30">
+                <Building2 className="h-4 w-4 text-primary" />
+              </div>
+              <span className="font-display font-bold tracking-tight">TempoCasa</span>
             </SheetTitle>
           </SheetHeader>
 
@@ -59,10 +62,10 @@ export function MobileNav() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
                     isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      ? 'bg-primary/10 text-primary border-l-2 border-primary'
+                      : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -73,9 +76,9 @@ export function MobileNav() {
           </nav>
 
           {/* Agent info */}
-          <div className="border-t p-4">
+          <div className="border-t border-border/50 p-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-medium text-primary border border-primary/30">
                 {agent.full_name
                   .split(' ')
                   .map((n) => n[0])

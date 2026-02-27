@@ -93,7 +93,7 @@ export function CalendarView({ appointments }: CalendarViewProps) {
             <Calendar className="mr-1 h-4 w-4" />
             Oggi
           </Button>
-          <h2 className="text-lg font-semibold capitalize ml-2">{headerLabel}</h2>
+          <h2 className="text-lg font-semibold font-display capitalize ml-2">{headerLabel}</h2>
         </div>
 
         <div className="flex items-center gap-1 rounded-md border p-0.5">
@@ -147,11 +147,11 @@ function WeekView({
             {/* Day header */}
             <div
               className={`text-center text-sm py-2 rounded-t-md border-b ${
-                today ? 'bg-primary text-primary-foreground font-bold' : 'bg-muted/50 text-muted-foreground'
+                today ? 'bg-primary text-primary-foreground font-bold ring-2 ring-primary ring-offset-1 ring-offset-background' : 'bg-muted/50 text-muted-foreground'
               }`}
             >
-              <div className="font-medium">{DAY_LABELS[i]}</div>
-              <div>{format(day, 'd')}</div>
+              <div className="font-medium font-display">{DAY_LABELS[i]}</div>
+              <div className={today ? 'font-mono-data' : ''}>{format(day, 'd')}</div>
             </div>
 
             {/* Appointments */}
@@ -195,7 +195,7 @@ function DayView({
         return (
           <div key={hour} className="flex min-h-[64px]">
             {/* Time label */}
-            <div className="w-16 shrink-0 border-r px-2 py-2 text-sm text-muted-foreground text-right">
+            <div className="w-16 shrink-0 border-r px-2 py-2 text-sm text-muted-foreground text-right font-mono-data">
               {String(hour).padStart(2, '0')}:00
             </div>
 

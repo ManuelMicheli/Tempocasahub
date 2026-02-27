@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/button';
 import { PropertyCard } from '@/components/properties/property-card';
 import { PropertyFilters } from '@/components/properties/property-filters';
+import { PageTransition } from '@/components/motion';
 import type { Property } from '@/types/database';
 
 interface SearchParams {
@@ -27,7 +28,8 @@ export default async function PropertiesPage({
   let query = supabase
     .from('properties')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(50);
 
   // Apply filters
   if (params.q) {
@@ -64,11 +66,12 @@ export default async function PropertiesPage({
   const items: Property[] = (properties as Property[]) ?? [];
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Immobili</h1>
+          <h1 className="text-2xl font-bold font-display">Immobili</h1>
           <p className="text-sm text-muted-foreground">
             {items.length} {items.length === 1 ? 'immobile' : 'immobili'}{' '}
             {params.q || params.status || params.city || params.price_min || params.price_max || params.type || params.rooms_min
@@ -112,5 +115,6 @@ export default async function PropertiesPage({
         </div>
       )}
     </div>
+    </PageTransition>
   );
 }

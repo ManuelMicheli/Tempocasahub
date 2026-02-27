@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { MatchCenterClient } from '@/components/matches/match-center-client';
+import { PageTransition } from '@/components/motion';
 import type { Match, Lead, Property } from '@/types/database';
 
 type MatchWithRelations = Match & { lead: Lead; property: Property };
@@ -10,7 +11,8 @@ export default async function MatchesPage() {
   const { data: matches } = await supabase
     .from('matches')
     .select('*, lead:leads(*), property:properties(*)')
-    .order('score', { ascending: false });
+    .order('score', { ascending: false })
+    .limit(100);
 
   const allMatches = ((matches as unknown as MatchWithRelations[]) ?? []).filter(
     (m) => m.lead && m.property
@@ -28,9 +30,10 @@ export default async function MatchesPage() {
   );
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Match Center</h1>
+        <h1 className="text-2xl font-bold font-display">Match Center</h1>
         <p className="text-sm text-muted-foreground">
           Gestisci i match tra immobili e clienti
         </p>
@@ -42,5 +45,6 @@ export default async function MatchesPage() {
         history={history}
       />
     </div>
+    </PageTransition>
   );
 }

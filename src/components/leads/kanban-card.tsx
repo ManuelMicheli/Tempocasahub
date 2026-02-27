@@ -91,7 +91,7 @@ export function KanbanCard({ lead, isDragOverlay = false }: KanbanCardProps) {
       <div className="flex items-center justify-between gap-1.5">
         <div className="flex items-center gap-1.5 min-w-0">
           <span className={cn('inline-block w-2 h-2 rounded-full shrink-0', tempColor)} />
-          <span className="text-sm font-medium truncate">{lead.full_name}</span>
+          <span className="text-sm font-medium truncate font-display">{lead.full_name}</span>
           {showWarning && (
             <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
           )}
@@ -112,7 +112,7 @@ export function KanbanCard({ lead, isDragOverlay = false }: KanbanCardProps) {
 
       {/* Row 3: Budget */}
       {budgetSummary && (
-        <p className="text-xs font-medium mt-1">{budgetSummary}</p>
+        <p className="text-xs font-medium mt-1 font-mono-data">{budgetSummary}</p>
       )}
 
       {/* Row 4: Zone badges */}

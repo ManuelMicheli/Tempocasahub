@@ -61,7 +61,7 @@ export default async function CensimentoPage() {
       if (agencyError) {
         return (
           <div className="mx-auto max-w-md space-y-4 p-6 text-center">
-            <h2 className="text-lg font-bold text-destructive">Configurazione Agenzia</h2>
+            <h2 className="font-display text-lg font-bold text-destructive">Configurazione Agenzia</h2>
             <p className="text-sm text-muted-foreground">
               Non è stato possibile creare l&apos;agenzia automaticamente.
               Devi applicare la migration <code className="rounded bg-muted px-1">004_agencies_insert_policy.sql</code> nel
@@ -121,7 +121,7 @@ CREATE POLICY "agencies_update" ON agencies
   if (zoneError || !newZone) {
     return (
       <div className="mx-auto max-w-md space-y-4 p-6 text-center">
-        <h2 className="text-lg font-bold text-destructive">Errore Creazione Zona</h2>
+        <h2 className="font-display text-lg font-bold text-destructive">Errore Creazione Zona</h2>
         <p className="text-sm text-muted-foreground">
           Non è stato possibile creare la zona Cornaredo.
           Verifica che la migration <code className="rounded bg-muted px-1">003_census.sql</code> sia stata applicata.

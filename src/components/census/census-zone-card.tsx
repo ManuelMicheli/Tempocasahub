@@ -20,7 +20,7 @@ export function CensusZoneCard({ zone }: CensusZoneCardProps) {
       <Card className="transition-colors hover:bg-accent/50">
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between">
-            <CardTitle className="text-base">{zone.name}</CardTitle>
+            <CardTitle className="font-display text-base">{zone.name}</CardTitle>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -36,15 +36,15 @@ export function CensusZoneCard({ zone }: CensusZoneCardProps) {
         <CardContent className="space-y-3">
           <div className="grid grid-cols-3 gap-2 text-center text-xs">
             <div>
-              <div className="text-lg font-bold">{zone.total_buildings}</div>
+              <div className="font-mono-data text-lg font-bold">{zone.total_buildings}</div>
               <div className="text-muted-foreground">Edifici</div>
             </div>
             <div>
-              <div className="text-lg font-bold">{zone.total_units}</div>
+              <div className="font-mono-data text-lg font-bold">{zone.total_units}</div>
               <div className="text-muted-foreground">Unità</div>
             </div>
             <div>
-              <div className="text-lg font-bold text-green-500">
+              <div className="font-mono-data text-lg font-bold text-green-500">
                 {zone.interested_count}
               </div>
               <div className="text-muted-foreground">Interessati</div>

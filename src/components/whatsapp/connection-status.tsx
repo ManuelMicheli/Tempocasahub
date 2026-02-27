@@ -22,7 +22,7 @@ export function ConnectionStatus({
             <Users className="h-4 w-4 text-green-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{monitoredContacts}</p>
+            <p className="font-display font-mono-data text-2xl font-bold">{monitoredContacts}</p>
             <p className="text-xs text-muted-foreground">Monitorati</p>
           </div>
         </CardContent>
@@ -34,7 +34,7 @@ export function ConnectionStatus({
             <MessageCircle className="h-4 w-4 text-blue-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{totalContacts}</p>
+            <p className="font-display font-mono-data text-2xl font-bold">{totalContacts}</p>
             <p className="text-xs text-muted-foreground">Contatti WA</p>
           </div>
         </CardContent>
@@ -46,7 +46,7 @@ export function ConnectionStatus({
             <RefreshCw className="h-4 w-4 text-purple-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{recentSyncs}</p>
+            <p className="font-display font-mono-data text-2xl font-bold">{recentSyncs}</p>
             <p className="text-xs text-muted-foreground">Sync 24h</p>
           </div>
         </CardContent>

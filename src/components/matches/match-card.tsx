@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { HoverScale } from '@/components/motion';
 import { updateMatchStatus } from '@/lib/actions/matches';
 import type { Match, Lead, Property, ScoreBreakdown, MatchStatus } from '@/types/database';
 
@@ -87,10 +88,11 @@ export function MatchCard({ match, onOpenDetail }: MatchCardProps) {
   }
 
   return (
-    <Card className="relative overflow-hidden">
+    <HoverScale>
+      <Card className="relative overflow-hidden">
       {/* Score Badge */}
       <div
-        className={`absolute right-3 top-3 flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold shadow-md ${getScoreColor(score)}`}
+        className={`absolute right-3 top-3 flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold font-mono-data shadow-md ${getScoreColor(score)}`}
       >
         {score}
       </div>
@@ -105,7 +107,7 @@ export function MatchCard({ match, onOpenDetail }: MatchCardProps) {
             {property.address}, {property.city}
           </p>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
-            <span className="font-semibold text-primary">{formatPrice(property.price)}</span>
+            <span className="font-semibold text-primary font-mono-data">{formatPrice(property.price)}</span>
             {property.sqm != null && <span>{property.sqm} mq</span>}
             {property.rooms != null && <span>{property.rooms} locali</span>}
           </div>
@@ -224,6 +226,7 @@ export function MatchCard({ match, onOpenDetail }: MatchCardProps) {
           </div>
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </HoverScale>
   );
 }

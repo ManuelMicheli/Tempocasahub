@@ -28,7 +28,7 @@ export function Header() {
     .slice(0, 2);
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b border-b-border/50 bg-background/60 backdrop-blur-xl px-4 lg:px-6 shadow-sm">
+    <header className="flex h-16 items-center gap-4 border-b border-b-border/50 bg-background/60 backdrop-blur-xl px-4 lg:px-6 shadow-sm">
       {/* Left: hamburger (visible below lg) + title area */}
       <div className="flex items-center gap-2 lg:hidden">
         <MobileNav />
@@ -53,8 +53,8 @@ export function Header() {
         {/* Avatar dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-              <Avatar className="h-8 w-8">
+            <Button variant="ghost" className="relative h-9 w-9 rounded-full transition-all duration-200 hover:ring-2 hover:ring-primary/30">
+              <Avatar className="h-9 w-9">
                 <AvatarFallback className="text-xs">{initials}</AvatarFallback>
               </Avatar>
             </Button>

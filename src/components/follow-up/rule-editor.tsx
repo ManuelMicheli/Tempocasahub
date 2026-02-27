@@ -79,7 +79,7 @@ export function RuleEditor({ rule, description }: RuleEditorProps) {
 
       <div className="flex-1 min-w-0">
         <p
-          className={`text-sm font-medium ${
+          className={`font-display text-sm font-medium ${
             !rule.is_active ? 'text-muted-foreground line-through' : ''
           }`}
         >

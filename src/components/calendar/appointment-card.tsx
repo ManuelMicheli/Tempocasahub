@@ -14,17 +14,17 @@ import {
 import { format } from 'date-fns';
 import type { Interaction, InteractionType } from '@/types/database';
 
-const TYPE_CONFIG: Record<InteractionType, { label: string; icon: typeof Phone; borderColor: string }> = {
-  call_outbound: { label: 'Chiamata', icon: Phone, borderColor: 'border-l-gray-400' },
-  call_inbound: { label: 'Chiamata', icon: Phone, borderColor: 'border-l-gray-400' },
-  whatsapp_sent: { label: 'WhatsApp', icon: MessageCircle, borderColor: 'border-l-green-400' },
-  whatsapp_received: { label: 'WhatsApp', icon: MessageCircle, borderColor: 'border-l-green-400' },
-  email_sent: { label: 'Email', icon: Mail, borderColor: 'border-l-blue-400' },
-  email_received: { label: 'Email', icon: Mail, borderColor: 'border-l-blue-400' },
-  visit: { label: 'Visita', icon: MapPin, borderColor: 'border-l-blue-500' },
-  meeting: { label: 'Incontro', icon: Users, borderColor: 'border-l-green-500' },
-  proposal: { label: 'Proposta', icon: FileText, borderColor: 'border-l-orange-500' },
-  note: { label: 'Nota', icon: StickyNote, borderColor: 'border-l-yellow-400' },
+const TYPE_CONFIG: Record<InteractionType, { label: string; icon: typeof Phone; borderColor: string; iconColor: string }> = {
+  call_outbound: { label: 'Chiamata', icon: Phone, borderColor: 'border-l-gray-400', iconColor: 'text-gray-500' },
+  call_inbound: { label: 'Chiamata', icon: Phone, borderColor: 'border-l-gray-400', iconColor: 'text-gray-500' },
+  whatsapp_sent: { label: 'WhatsApp', icon: MessageCircle, borderColor: 'border-l-green-400', iconColor: 'text-green-500' },
+  whatsapp_received: { label: 'WhatsApp', icon: MessageCircle, borderColor: 'border-l-green-400', iconColor: 'text-green-500' },
+  email_sent: { label: 'Email', icon: Mail, borderColor: 'border-l-blue-400', iconColor: 'text-blue-500' },
+  email_received: { label: 'Email', icon: Mail, borderColor: 'border-l-blue-400', iconColor: 'text-blue-500' },
+  visit: { label: 'Visita', icon: MapPin, borderColor: 'border-l-blue-500', iconColor: 'text-blue-600' },
+  meeting: { label: 'Incontro', icon: Users, borderColor: 'border-l-green-500', iconColor: 'text-green-600' },
+  proposal: { label: 'Proposta', icon: FileText, borderColor: 'border-l-orange-500', iconColor: 'text-orange-500' },
+  note: { label: 'Nota', icon: StickyNote, borderColor: 'border-l-yellow-400', iconColor: 'text-yellow-500' },
 };
 
 interface AppointmentCardProps {
@@ -58,8 +58,8 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
       >
         <Link href={leadHref} className="block hover:bg-accent transition-colors rounded-sm">
           <div className="flex items-center gap-1 font-medium">
-            <span className="text-muted-foreground">{time}</span>
-            <Icon className="h-3 w-3 shrink-0" />
+            <span className="text-muted-foreground font-mono-data">{time}</span>
+            <Icon className={`h-3 w-3 shrink-0 ${config.iconColor}`} />
           </div>
           <p className="truncate font-medium mt-0.5">{appointment.lead?.full_name}</p>
           {appointment.property?.address && (
@@ -88,8 +88,8 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
     >
       <Link href={leadHref} className="block hover:bg-accent transition-colors rounded-sm">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-muted-foreground">{time}</span>
-          <Icon className="h-4 w-4 shrink-0" />
+          <span className="text-sm font-semibold text-muted-foreground font-mono-data">{time}</span>
+          <Icon className={`h-4 w-4 shrink-0 ${config.iconColor}`} />
           <span className="text-sm">{config.label}</span>
         </div>
         <p className="font-medium mt-1">{appointment.lead?.full_name}</p>

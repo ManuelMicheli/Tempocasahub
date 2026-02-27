@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { PageTransition } from '@/components/motion';
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
@@ -35,9 +36,10 @@ export default function LoginPage() {
   }
 
   return (
+    <PageTransition>
     <Card className="glass-card border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold tracking-tight">Accedi</CardTitle>
+        <CardTitle className="text-2xl font-bold tracking-tight font-display">Accedi</CardTitle>
         <CardDescription className="text-muted-foreground">
           Inserisci le tue credenziali per accedere al CRM
         </CardDescription>
@@ -95,5 +97,6 @@ export default function LoginPage() {
         </CardFooter>
       </form>
     </Card>
+    </PageTransition>
   );
 }

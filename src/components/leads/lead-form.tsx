@@ -77,7 +77,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
       {/* Sezione Anagrafica */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Anagrafica</CardTitle>
+          <CardTitle className="text-lg font-display">Anagrafica</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -118,7 +118,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
       {/* Sezione Classificazione */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Classificazione</CardTitle>
+          <CardTitle className="text-lg font-display">Classificazione</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -192,7 +192,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
       {showBuyer && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Ricerca</CardTitle>
+            <CardTitle className="text-lg font-display">Ricerca</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -307,7 +307,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
       {showSeller && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Vendita</CardTitle>
+            <CardTitle className="text-lg font-display">Vendita</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -371,7 +371,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
       {/* Sezione Note */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Note</CardTitle>
+          <CardTitle className="text-lg font-display">Note</CardTitle>
         </CardHeader>
         <CardContent>
           <Textarea

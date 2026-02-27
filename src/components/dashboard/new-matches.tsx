@@ -49,7 +49,7 @@ export function NewMatches({ matches }: NewMatchesProps) {
               {match.score}%
             </Badge>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium truncate">
+              <p className="text-sm font-medium truncate font-display">
                 {match.property.address}, {match.property.city}
               </p>
               <p className="text-xs text-muted-foreground">

@@ -56,7 +56,7 @@ export function UrgentLeads({ leads }: UrgentLeadsProps) {
               href={`/leads/${lead.id}`}
               className="min-w-0 flex-1"
             >
-              <p className="text-sm font-medium truncate">{lead.full_name}</p>
+              <p className="text-sm font-medium truncate font-display">{lead.full_name}</p>
               <p className="text-xs text-muted-foreground">{reason}</p>
             </Link>
             {lead.phone && (

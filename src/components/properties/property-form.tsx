@@ -160,7 +160,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 1: Dettagli */}
       <Card>
         <CardHeader>
-          <CardTitle>Dettagli</CardTitle>
+          <CardTitle className="font-display">Dettagli</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2 sm:col-span-2">
@@ -232,7 +232,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 2: Caratteristiche */}
       <Card>
         <CardHeader>
-          <CardTitle>Caratteristiche</CardTitle>
+          <CardTitle className="font-display">Caratteristiche</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-2">
@@ -353,7 +353,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 3: Features */}
       <Card>
         <CardHeader>
-          <CardTitle>Dotazioni</CardTitle>
+          <CardTitle className="font-display">Dotazioni</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -379,7 +379,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 4: Stato e Condizioni */}
       <Card>
         <CardHeader>
-          <CardTitle>Stato e Condizioni</CardTitle>
+          <CardTitle className="font-display">Stato e Condizioni</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-3">
           <div className="space-y-2">
@@ -435,7 +435,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 5: Media */}
       <Card>
         <CardHeader>
-          <CardTitle>Media</CardTitle>
+          <CardTitle className="font-display">Media</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="space-y-2">
@@ -467,7 +467,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 6: Portali */}
       <Card>
         <CardHeader>
-          <CardTitle>Portali di pubblicazione</CardTitle>
+          <CardTitle className="font-display">Portali di pubblicazione</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-4">
@@ -493,7 +493,7 @@ export function PropertyForm({ initialData, propertyId }: PropertyFormProps) {
       {/* Section 7: Descrizione */}
       <Card>
         <CardHeader>
-          <CardTitle>Descrizione</CardTitle>
+          <CardTitle className="font-display">Descrizione</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="space-y-2">

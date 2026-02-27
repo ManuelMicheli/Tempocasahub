@@ -49,19 +49,19 @@ export function MatchCenterClient({ suggested, sent, history }: MatchCenterClien
     <>
       <Tabs defaultValue="suggested" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="suggested" className="gap-2">
+          <TabsTrigger value="suggested" className="gap-2 font-display">
             Nuovi suggerimenti
             <Badge variant="secondary" className="ml-1 h-5 min-w-[20px] justify-center rounded-full px-1.5 text-[10px]">
               {suggested.length}
             </Badge>
           </TabsTrigger>
-          <TabsTrigger value="sent" className="gap-2">
+          <TabsTrigger value="sent" className="gap-2 font-display">
             Inviati
             <Badge variant="secondary" className="ml-1 h-5 min-w-[20px] justify-center rounded-full px-1.5 text-[10px]">
               {sent.length}
             </Badge>
           </TabsTrigger>
-          <TabsTrigger value="history" className="gap-2">
+          <TabsTrigger value="history" className="gap-2 font-display">
             Storico
             <Badge variant="secondary" className="ml-1 h-5 min-w-[20px] justify-center rounded-full px-1.5 text-[10px]">
               {history.length}

@@ -6,8 +6,11 @@ import { Button } from '@/components/ui/button';
 import { LeadCard } from '@/components/leads/lead-card';
 import { LeadFilters } from '@/components/leads/lead-filters';
 import { LeadsViewToggle } from '@/components/leads/leads-view-toggle';
-import { KanbanBoard } from '@/components/leads/kanban-board';
+import dynamic from 'next/dynamic';
+import { PageTransition } from '@/components/motion';
 import type { Lead } from '@/types/database';
+
+const KanbanBoard = dynamic(() => import('@/components/leads/kanban-board').then(m => m.KanbanBoard), { ssr: false });
 
 interface LeadsPageProps {
   searchParams: Promise<{
@@ -36,7 +39,8 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
     .from('leads')
     .select('*')
     .eq('agent_id', agent.id)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(50);
 
   if (params.search) {
     const search = `%${params.search}%`;
@@ -61,11 +65,12 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
   const currentView = params.view || 'kanban';
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Lead</h1>
+          <h1 className="text-2xl font-bold font-display">Lead</h1>
           <p className="text-sm text-muted-foreground">
             {leadsList.length} {leadsList.length === 1 ? 'risultato' : 'risultati'}
           </p>
@@ -107,5 +112,6 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
         </div>
       )}
     </div>
+    </PageTransition>
   );
 }

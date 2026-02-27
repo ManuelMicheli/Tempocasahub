@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { PageTransition } from '@/components/motion';
 
 export default async function NewCensusZonePage() {
   const agent = await getCurrentAgent();
@@ -17,9 +18,10 @@ export default async function NewCensusZonePage() {
   }
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-lg space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Nuova Zona di Censimento</h1>
+        <h1 className="font-display text-2xl font-bold">Nuova Zona di Censimento</h1>
         <p className="text-sm text-muted-foreground">
           Crea una nuova zona per il censimento porta a porta
         </p>
@@ -76,5 +78,6 @@ export default async function NewCensusZonePage() {
         </CardContent>
       </Card>
     </div>
+    </PageTransition>
   );
 }

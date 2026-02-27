@@ -1,16 +1,33 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const clashDisplay = localFont({
+  src: [
+    { path: "./fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/ClashDisplay-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-display",
+  display: "swap",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const satoshi = localFont({
+  src: [
+    { path: "./fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/Satoshi-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}
+        className={`${satoshi.variable} ${clashDisplay.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen relative`}
       >
         <ThemeProvider
           attribute="class"
@@ -38,8 +55,9 @@ export default function RootLayout({
         >
           {/* Cinematic Ambient Background */}
           <div className="fixed inset-0 z-[-1] bg-background">
-            <div className="absolute top-[-20%] left-[-10%] h-[50%] w-[50%] rounded-full bg-primary/30 blur-[130px] opacity-60 dark:opacity-50 mix-blend-multiply dark:mix-blend-screen transition-all duration-1000" />
-            <div className="absolute top-[40%] right-[-10%] h-[40%] w-[40%] rounded-full bg-primary/20 blur-[120px] opacity-40 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen animate-pulse transition-all duration-1000" />
+            <div className="absolute top-[-20%] left-[-10%] h-[50%] w-[50%] rounded-full bg-primary/25 blur-[150px] opacity-50 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen" />
+            <div className="absolute top-[40%] right-[-10%] h-[40%] w-[40%] rounded-full bg-primary/15 blur-[130px] opacity-30 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen" />
+            <div className="absolute bottom-[-10%] left-[30%] h-[35%] w-[35%] rounded-full bg-accent-warm/10 blur-[120px] opacity-20 dark:opacity-15 mix-blend-multiply dark:mix-blend-screen" />
           </div>
           {children}
         </ThemeProvider>

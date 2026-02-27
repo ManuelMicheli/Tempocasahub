@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/button';
 import { PropertyForm } from '@/components/properties/property-form';
+import { PageTransition } from '@/components/motion';
 import type { Property } from '@/types/database';
 
 export default async function EditPropertyPage({
@@ -25,6 +26,7 @@ export default async function EditPropertyPage({
   const property = data as Property;
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-3xl space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
@@ -34,7 +36,7 @@ export default async function EditPropertyPage({
           </Link>
         </Button>
         <div>
-          <h1 className="text-2xl font-bold">Modifica Immobile</h1>
+          <h1 className="text-2xl font-bold font-display">Modifica Immobile</h1>
           <p className="text-sm text-muted-foreground">
             {property.title || property.address}
           </p>
@@ -44,5 +46,6 @@ export default async function EditPropertyPage({
       {/* Form */}
       <PropertyForm initialData={property} propertyId={property.id} />
     </div>
+    </PageTransition>
   );
 }

@@ -30,12 +30,14 @@ export function Sidebar() {
   const agent = useAgent();
 
   return (
-    <aside className="flex h-full w-[250px] flex-col border-r border-r-border/50 bg-background/60 backdrop-blur-xl">
+    <aside className="flex h-full w-[260px] flex-col border-r border-r-border/50 bg-background/60 backdrop-blur-xl">
       {/* Logo / Brand */}
-      <div className="flex h-14 items-center border-b px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <Building2 className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold">TempoCasa</span>
+      <div className="flex h-16 items-center border-b border-border/50 px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 border border-primary/30">
+            <Building2 className="h-5 w-5 text-primary" />
+          </div>
+          <span className="font-display text-lg font-bold tracking-tight">TempoCasa</span>
         </Link>
       </div>
 
@@ -52,10 +54,10 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
                 isActive
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                  ? 'bg-primary/10 text-primary border-l-2 border-primary'
+                  : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -66,9 +68,9 @@ export function Sidebar() {
       </nav>
 
       {/* Agent info */}
-      <div className="border-t p-4">
+      <div className="border-t border-border/50 p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-medium text-primary border border-primary/30">
             {agent.full_name
               .split(' ')
               .map((n) => n[0])

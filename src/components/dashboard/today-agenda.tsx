@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { StaggerContainer, StaggerItem } from '@/components/motion';
 import { Button } from '@/components/ui/button';
 import {
   Flame,
@@ -57,46 +58,47 @@ export function TodayAgenda({ items }: TodayAgendaProps) {
   }
 
   return (
-    <div className="space-y-3">
+    <StaggerContainer className="space-y-3">
       {items.map((item, index) => {
         const Icon = typeIcons[item.type] || Clock;
         const iconColor = typeIconColors[item.type] || 'text-muted-foreground';
 
         return (
-          <div
-            key={`${item.type}-${index}`}
-            className={`group flex items-center gap-3 rounded-lg border-l-4 bg-gradient-to-r from-muted/40 to-transparent hover:from-muted/60 transition-all p-3 ${priorityBorder[item.priority]}`}
-          >
-            <div className="shrink-0">
-              <Icon className={`h-5 w-5 ${iconColor}`} />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold leading-tight">
-                {item.title}
-                {item.count !== undefined && item.count > 0 && (
-                  <span className="ml-1 text-muted-foreground font-normal">
-                    ({item.count})
-                  </span>
-                )}
-              </p>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {item.description}
-              </p>
-              {item.time && (
-                <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {item.time}
+          <StaggerItem key={`${item.type}-${index}`}>
+            <div
+              className={`group flex items-center gap-3 rounded-lg border-l-4 bg-gradient-to-r from-muted/40 to-transparent hover:from-muted/60 transition-all p-3 ${priorityBorder[item.priority]}`}
+            >
+              <div className="shrink-0">
+                <Icon className={`h-5 w-5 ${iconColor}`} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-semibold leading-tight font-display">
+                  {item.title}
+                  {item.count !== undefined && item.count > 0 && (
+                    <span className="ml-1 text-muted-foreground font-normal">
+                      ({item.count})
+                    </span>
+                  )}
                 </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {item.description}
+                </p>
+                {item.time && (
+                  <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {item.time}
+                  </p>
+                )}
+              </div>
+              {item.link && (
+                <Button variant="ghost" size="sm" asChild className="shrink-0">
+                  <Link href={item.link}>Vai</Link>
+                </Button>
               )}
             </div>
-            {item.link && (
-              <Button variant="ghost" size="sm" asChild className="shrink-0">
-                <Link href={item.link}>Vai</Link>
-              </Button>
-            )}
-          </div>
+          </StaggerItem>
         );
       })}
-    </div>
+    </StaggerContainer>
   );
 }

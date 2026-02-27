@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/button';
 import { LeadForm } from '@/components/leads/lead-form';
+import { PageTransition } from '@/components/motion';
 import type { Lead } from '@/types/database';
 
 interface EditLeadPageProps {
@@ -27,6 +28,7 @@ export default async function EditLeadPage({ params }: EditLeadPageProps) {
   const typedLead = lead as Lead;
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" asChild>
@@ -34,9 +36,10 @@ export default async function EditLeadPage({ params }: EditLeadPageProps) {
             <ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <h1 className="text-2xl font-bold">Modifica Lead</h1>
+        <h1 className="text-2xl font-bold font-display">Modifica Lead</h1>
       </div>
       <LeadForm initialData={typedLead} leadId={id} />
     </div>
+    </PageTransition>
   );
 }

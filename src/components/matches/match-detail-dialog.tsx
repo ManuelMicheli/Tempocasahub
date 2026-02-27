@@ -168,10 +168,10 @@ export function MatchDetailDialog({ match, open, onOpenChange }: MatchDetailDial
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-3">
+          <DialogTitle className="flex items-center gap-3 font-display">
             <span>NUOVO MATCH</span>
             <span
-              className={`inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${getScoreColor(score)}`}
+              className={`inline-flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold font-mono-data ${getScoreColor(score)}`}
             >
               {score}
             </span>
@@ -203,7 +203,7 @@ export function MatchDetailDialog({ match, open, onOpenChange }: MatchDetailDial
               </Link>
             </div>
             <p className="text-sm">
-              <span className="font-semibold">{formatPrice(property.price)}</span>
+              <span className="font-semibold font-mono-data">{formatPrice(property.price)}</span>
               {lead.budget_min != null && lead.budget_max != null && (
                 <span className="ml-2 text-muted-foreground">
                   (budget: {formatPrice(lead.budget_min)}-{formatPrice(lead.budget_max)}{' '}
@@ -270,7 +270,7 @@ export function MatchDetailDialog({ match, open, onOpenChange }: MatchDetailDial
 
           {/* Score Breakdown */}
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Dettaglio punteggio</p>
+            <p className="text-sm font-semibold font-display">Dettaglio punteggio</p>
             {score_breakdown && (
               <div className="space-y-2">
                 {(Object.keys(SCORE_LABELS) as (keyof ScoreBreakdown)[]).map((key) => {
@@ -320,7 +320,7 @@ export function MatchDetailDialog({ match, open, onOpenChange }: MatchDetailDial
 
           {/* Agent Notes */}
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Note agente</p>
+            <p className="text-sm font-semibold font-display">Note agente</p>
             <Textarea
               value={agentNotes}
               onChange={(e) => setAgentNotes(e.target.value)}
@@ -345,7 +345,7 @@ export function MatchDetailDialog({ match, open, onOpenChange }: MatchDetailDial
 
           {/* Client Feedback */}
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Feedback cliente</p>
+            <p className="text-sm font-semibold font-display">Feedback cliente</p>
             <Textarea
               value={clientFeedbackText}
               onChange={(e) => setClientFeedbackText(e.target.value)}

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, MessageCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { PageTransition } from '@/components/motion';
 import { QrScanner } from '@/components/whatsapp/qr-scanner';
 import { ConnectionStatus } from '@/components/whatsapp/connection-status';
 import { ContactList } from '@/components/whatsapp/contact-list';
@@ -92,6 +93,7 @@ export default function WhatsAppSettingsPage() {
   const agentId = statusData?.agentId || '';
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
@@ -102,7 +104,7 @@ export default function WhatsAppSettingsPage() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold flex items-center gap-2">
+          <h1 className="font-display text-2xl font-bold flex items-center gap-2">
             <MessageCircle className="h-6 w-6 text-green-600" />
             WhatsApp
           </h1>
@@ -179,5 +181,6 @@ export default function WhatsAppSettingsPage() {
         </Card>
       )}
     </div>
+    </PageTransition>
   );
 }

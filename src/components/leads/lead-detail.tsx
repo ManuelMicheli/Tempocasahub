@@ -98,7 +98,7 @@ export function LeadDetail({ lead }: LeadDetailProps) {
       {/* Anagrafica */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Anagrafica</CardTitle>
+          <CardTitle className="text-lg font-display">Anagrafica</CardTitle>
         </CardHeader>
         <CardContent>
           <DetailRow label="Nome completo" value={lead.full_name} />
@@ -112,7 +112,7 @@ export function LeadDetail({ lead }: LeadDetailProps) {
       {showBuyer && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Ricerca</CardTitle>
+            <CardTitle className="text-lg font-display">Ricerca</CardTitle>
           </CardHeader>
           <CardContent>
             <DetailRow
@@ -200,7 +200,7 @@ export function LeadDetail({ lead }: LeadDetailProps) {
       {showSeller && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Vendita</CardTitle>
+            <CardTitle className="text-lg font-display">Vendita</CardTitle>
           </CardHeader>
           <CardContent>
             <DetailRow label="Indirizzo immobile" value={lead.selling_address} />
@@ -228,7 +228,7 @@ export function LeadDetail({ lead }: LeadDetailProps) {
       {lead.notes && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Note</CardTitle>
+            <CardTitle className="text-lg font-display">Note</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm whitespace-pre-wrap">{lead.notes}</p>
@@ -239,7 +239,7 @@ export function LeadDetail({ lead }: LeadDetailProps) {
       {/* Date di sistema */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Informazioni</CardTitle>
+          <CardTitle className="text-lg font-display">Informazioni</CardTitle>
         </CardHeader>
         <CardContent>
           <DetailRow

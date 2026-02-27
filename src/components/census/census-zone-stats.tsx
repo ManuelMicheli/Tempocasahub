@@ -2,6 +2,7 @@
 
 import { Building2, Users, UserCheck, Percent } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { StaggerContainer, StaggerItem } from '@/components/motion';
 import type { CensusZone } from '@/types/database';
 
 interface CensusZoneStatsProps {
@@ -46,22 +47,24 @@ export function CensusZoneStats({ zone }: CensusZoneStatsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+    <StaggerContainer className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
       {stats.map((stat) => (
-        <Card key={stat.label}>
+        <StaggerItem key={stat.label}>
+        <Card>
           <CardContent className="flex items-center gap-3 p-3">
             <stat.icon
               className={`h-5 w-5 shrink-0 ${stat.color || 'text-muted-foreground'}`}
             />
             <div>
-              <p className={`text-lg font-bold ${stat.color || ''}`}>
+              <p className={`font-display text-lg font-bold font-mono-data ${stat.color || ''}`}>
                 {stat.value}
               </p>
               <p className="text-xs text-muted-foreground">{stat.label}</p>
             </div>
           </CardContent>
         </Card>
+        </StaggerItem>
       ))}
-    </div>
+    </StaggerContainer>
   );
 }

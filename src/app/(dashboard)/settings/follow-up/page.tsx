@@ -12,6 +12,7 @@ import {
   TRIGGER_EVENT_LABELS,
   TEMPLATE_DESCRIPTIONS,
 } from '@/lib/follow-up/rules';
+import { PageTransition } from '@/components/motion';
 import type { FollowUpRule } from '@/types/database';
 
 export default async function FollowUpSettingsPage() {
@@ -47,6 +48,7 @@ export default async function FollowUpSettingsPage() {
   const hasRules = typedRules.length > 0;
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
@@ -56,7 +58,7 @@ export default async function FollowUpSettingsPage() {
           </Link>
         </Button>
         <div>
-          <h1 className="text-2xl font-bold">Regole Follow-up</h1>
+          <h1 className="font-display text-2xl font-bold">Regole Follow-up</h1>
           <p className="text-sm text-muted-foreground">
             Configura le regole automatiche di follow-up per i tuoi lead
           </p>
@@ -117,5 +119,6 @@ export default async function FollowUpSettingsPage() {
         </CardContent>
       </Card>
     </div>
+    </PageTransition>
   );
 }

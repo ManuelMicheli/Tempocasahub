@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LeadForm } from '@/components/leads/lead-form';
 import { VoiceInput } from '@/components/ai/voice-input';
+import { PageTransition } from '@/components/motion';
 import type { Lead } from '@/types/database';
 
 export default function NewLeadPage() {
@@ -41,6 +42,7 @@ export default function NewLeadPage() {
   };
 
   return (
+    <PageTransition>
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" asChild>
@@ -48,7 +50,7 @@ export default function NewLeadPage() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <h1 className="text-2xl font-bold">Nuovo Lead</h1>
+        <h1 className="text-2xl font-bold font-display">Nuovo Lead</h1>
       </div>
 
       {/* Voice/AI Input */}
@@ -71,5 +73,6 @@ export default function NewLeadPage() {
         initialData={aiData as Lead | undefined}
       />
     </div>
+    </PageTransition>
   );
 }

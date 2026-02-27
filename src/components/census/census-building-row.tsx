@@ -37,7 +37,7 @@ export function CensusBuildingRow({ building, units, ownersByUnit }: CensusBuild
         )}
         <div className={`h-3 w-3 shrink-0 rounded-full ${statusColor}`} />
         <Building2 className="h-4 w-4 shrink-0 text-muted-foreground" />
-        <span className="font-medium">
+        <span className="font-display font-medium">
           n. {building.civic_number}
         </span>
         <div className="ml-auto flex items-center gap-2">

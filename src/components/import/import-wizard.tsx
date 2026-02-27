@@ -215,7 +215,7 @@ export function ImportWizard() {
       {step === 'type' && (
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-1">Cosa vuoi importare?</h3>
+            <h3 className="font-display text-lg font-semibold mb-1">Cosa vuoi importare?</h3>
             <p className="text-sm text-muted-foreground">
               Scegli il tipo di dati da importare e scarica il template se necessario
             </p>
@@ -294,7 +294,7 @@ export function ImportWizard() {
       {step === 'upload' && (
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-1">Carica i tuoi file</h3>
+            <h3 className="font-display text-lg font-semibold mb-1">Carica i tuoi file</h3>
             <p className="text-sm text-muted-foreground">
               Carica uno o piu file CSV/Excel, oppure un&apos;intera cartella.
               I dati verranno unificati automaticamente.
@@ -357,7 +357,7 @@ export function ImportWizard() {
       {step === 'mapping' && parseResult && (
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-1">Mappa le colonne</h3>
+            <h3 className="font-display text-lg font-semibold mb-1">Mappa le colonne</h3>
             <p className="text-sm text-muted-foreground">
               Associa le colonne del tuo file ai campi del CRM. Abbiamo pre-compilato i
               match trovati automaticamente.
@@ -377,7 +377,7 @@ export function ImportWizard() {
       {step === 'preview' && parseResult && validationResult && (
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-1">
+            <h3 className="font-display text-lg font-semibold mb-1">
               {importResult ? 'Risultato importazione' : 'Anteprima e importazione'}
             </h3>
             {!importResult && (

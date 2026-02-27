@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Building2, Maximize2, DoorOpen, Layers } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { HoverScale } from '@/components/motion';
 import type { Property } from '@/types/database';
 
 const STATUS_CONFIG: Record<
@@ -69,6 +70,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
   const extraCount = features.length - 3;
 
   return (
+    <HoverScale>
     <Link href={`/properties/${property.id}`}>
       <Card className="group overflow-hidden transition-shadow hover:shadow-lg">
         {/* Photo area */}
@@ -103,7 +105,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </p>
 
           {/* Price */}
-          <p className="mt-2 text-lg font-bold text-primary">
+          <p className="mt-2 text-lg font-bold text-primary font-mono-data">
             {formatPrice(property.price)}
           </p>
 
@@ -163,5 +165,6 @@ export function PropertyCard({ property }: PropertyCardProps) {
         </CardContent>
       </Card>
     </Link>
+    </HoverScale>
   );
 }

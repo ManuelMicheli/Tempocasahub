@@ -84,7 +84,7 @@ export function NewAppointmentDialog({ leads, properties }: NewAppointmentDialog
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Nuovo Appuntamento</DialogTitle>
+          <DialogTitle className="font-display">Nuovo Appuntamento</DialogTitle>
           <DialogDescription>
             Schedula un nuovo appuntamento nel calendario.
           </DialogDescription>

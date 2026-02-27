@@ -10,6 +10,7 @@ import { CensusFilters } from '@/components/census/census-filters';
 import { CensusListView } from '@/components/census/census-list-view';
 import { CensusMapView } from '@/components/census/census-map-view';
 import { CensusSyncButton } from '@/components/census/census-sync-button';
+import { PageTransition } from '@/components/motion';
 import type { CensusZone, CensusBuilding, CensusUnit, CensusOwner } from '@/types/database';
 
 interface ZonePageProps {
@@ -109,11 +110,12 @@ export default async function CensusZonePage({ params, searchParams }: ZonePageP
   const viewMode = search.view === 'list' ? 'list' : 'map';
 
   return (
+    <PageTransition>
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Censimento — {censusZone.name}</h1>
+          <h1 className="font-display text-2xl font-bold">Censimento — {censusZone.name}</h1>
           <p className="text-sm text-muted-foreground">
             {censusZone.province && `${censusZone.province} `}
             {censusZone.municipality_code && `· Cod. ${censusZone.municipality_code} `}
@@ -165,5 +167,6 @@ export default async function CensusZonePage({ params, searchParams }: ZonePageP
         />
       )}
     </div>
+    </PageTransition>
   );
 }
