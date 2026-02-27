@@ -30,14 +30,14 @@ export default async function DashboardLayout({
         </div>
 
         {/* Main content area */}
-        <div className="flex flex-1 flex-col lg:pl-[260px]">
+        <div className="flex flex-1 flex-col min-w-0 lg:pl-[260px]">
           {/* Header: always visible, hamburger only below lg */}
           <div className="sticky top-0 z-20">
             <Header />
           </div>
 
           {/* Page content */}
-          <main className="flex-1 p-4 md:p-6">
+          <main className="flex-1 p-4 md:p-6 min-w-0 overflow-x-hidden">
             <MotionProvider>
               {children}
             </MotionProvider>
