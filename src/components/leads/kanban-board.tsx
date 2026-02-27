@@ -140,7 +140,7 @@ export function KanbanBoard({ leads }: KanbanBoardProps) {
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
       >
-        <div className="-mx-4 px-4 md:mx-0 md:px-0 flex gap-2 md:gap-3 overflow-x-auto pb-4 snap-x snap-mandatory md:snap-none">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto pb-4">
           {COLUMNS.map((col) => (
             <KanbanColumn
               key={col.status}
