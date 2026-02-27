@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { setupCornaredo } from '@/lib/census/setup-cornaredo';
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -26,12 +27,25 @@ export async function register(formData: FormData) {
   if (error) return { error: error.message };
 
   if (data.user) {
-    await supabase.from('agents').insert({
-      user_id: data.user.id,
-      full_name: fullName,
-      phone: phone,
-      email: email,
-    });
+    const { data: agent } = await supabase
+      .from('agents')
+      .insert({
+        user_id: data.user.id,
+        full_name: fullName,
+        phone: phone,
+        email: email,
+      })
+      .select()
+      .single();
+
+    // Auto-setup Cornaredo census data (best-effort)
+    if (agent) {
+      try {
+        await setupCornaredo(supabase, agent.id, null);
+      } catch (e) {
+        console.error('Census setup during registration failed:', e);
+      }
+    }
   }
 
   revalidatePath('/', 'layout');
