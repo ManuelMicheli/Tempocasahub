@@ -85,6 +85,7 @@ export interface Agent {
   phone: string | null;
   email: string | null;
   role: AgentRole;
+  quick_notes: string | null;
   created_at: string;
 }
 

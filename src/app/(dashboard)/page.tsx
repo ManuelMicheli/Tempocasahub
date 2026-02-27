@@ -7,6 +7,7 @@ import { KpiCards } from '@/components/dashboard/kpi-cards';
 import { TodayAgenda, type AgendaItem } from '@/components/dashboard/today-agenda';
 import { UrgentLeads } from '@/components/dashboard/urgent-leads';
 import { NewMatches } from '@/components/dashboard/new-matches';
+import { QuickNotes } from '@/components/dashboard/quick-notes';
 import { PageTransition } from '@/components/motion';
 import type { Lead } from '@/types/database';
 
@@ -332,6 +333,12 @@ export default async function DashboardPage() {
             </CardHeader>
             <CardContent>
               <NewMatches matches={newMatchesList} />
+            </CardContent>
+          </Card>
+
+          <Card className="glass-card">
+            <CardContent className="pt-5">
+              <QuickNotes initialNotes={agent.quick_notes ?? ''} />
             </CardContent>
           </Card>
         </div>
