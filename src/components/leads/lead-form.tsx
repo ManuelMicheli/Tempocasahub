@@ -160,7 +160,7 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
             <RadioGroup
               name="temperature"
               defaultValue={initialData?.temperature || 'warm'}
-              className="flex gap-4 mt-2"
+              className="flex flex-wrap gap-3 sm:gap-4 mt-2"
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="hot" id="temp-hot" />
@@ -383,8 +383,8 @@ export function LeadForm({ initialData, leadId }: LeadFormProps) {
         </CardContent>
       </Card>
 
-      <div className="flex justify-end">
-        <Button type="submit" disabled={isPending} size="lg">
+      <div className="flex flex-col sm:flex-row sm:justify-end">
+        <Button type="submit" disabled={isPending} size="lg" className="w-full sm:w-auto">
           {isPending ? 'Salvataggio...' : isEdit ? 'Salva Modifiche' : 'Crea Lead'}
         </Button>
       </div>

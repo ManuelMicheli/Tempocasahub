@@ -68,22 +68,20 @@ export function LeadFilters() {
   );
 
   return (
-    <div className="flex flex-wrap items-end gap-3">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-end">
       <Input
-        placeholder="Cerca per nome, telefono, email..."
+        placeholder="Cerca nome, telefono, email..."
         defaultValue={currentSearch}
         onChange={(e) => {
-          // Debounce-like: only update on blur or enter for simplicity
-          // But we use onChange for instant feedback
           updateParams('search', e.target.value);
         }}
-        className="w-full sm:w-64"
+        className="sm:col-span-2 lg:w-64"
       />
       <Select
         value={currentStatus}
         onValueChange={(val) => updateParams('status', val)}
       >
-        <SelectTrigger className="w-full sm:w-44">
+        <SelectTrigger className="lg:w-44">
           <SelectValue placeholder="Stato" />
         </SelectTrigger>
         <SelectContent>
@@ -98,7 +96,7 @@ export function LeadFilters() {
         value={currentTemperature}
         onValueChange={(val) => updateParams('temperature', val)}
       >
-        <SelectTrigger className="w-full sm:w-44">
+        <SelectTrigger className="lg:w-44">
           <SelectValue placeholder="Temperatura" />
         </SelectTrigger>
         <SelectContent>
@@ -113,7 +111,7 @@ export function LeadFilters() {
         value={currentSource}
         onValueChange={(val) => updateParams('source', val)}
       >
-        <SelectTrigger className="w-full sm:w-44">
+        <SelectTrigger className="lg:w-44">
           <SelectValue placeholder="Fonte" />
         </SelectTrigger>
         <SelectContent>

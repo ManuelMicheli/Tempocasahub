@@ -65,8 +65,8 @@ function DetailRow({ label, value }: { label: string; value: React.ReactNode }) 
   if (value === null || value === undefined || value === '' || value === '-') return null;
   return (
     <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 py-1.5">
-      <span className="text-sm text-muted-foreground sm:w-40 shrink-0">{label}</span>
-      <span className="text-sm font-medium">{value}</span>
+      <span className="text-xs sm:text-sm text-muted-foreground sm:w-36 shrink-0">{label}</span>
+      <span className="text-sm font-medium min-w-0 break-words">{value}</span>
     </div>
   );
 }

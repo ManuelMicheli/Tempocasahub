@@ -86,20 +86,20 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
     <PageTransition>
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" asChild>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3 min-w-0">
+          <Button variant="ghost" size="icon" className="shrink-0" asChild>
             <Link href="/leads">
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
-          <h1 className="text-2xl font-bold font-display">{typedLead.full_name}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold font-display truncate">{typedLead.full_name}</h1>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" asChild>
+        <div className="flex items-center gap-2 pl-11 sm:pl-0">
+          <Button variant="outline" size="sm" asChild>
             <Link href={`/leads/${id}/edit`}>
               <Pencil className="h-4 w-4" />
-              Modifica
+              <span className="hidden sm:inline">Modifica</span>
             </Link>
           </Button>
           <DeleteLeadButton leadId={id} leadName={typedLead.full_name} />
@@ -111,7 +111,7 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
 
       {/* Interazioni */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between space-y-0">
           <CardTitle className="text-lg">Interazioni</CardTitle>
           <InteractionForm
             leadId={id}
@@ -138,9 +138,9 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
                   return (
                     <div
                       key={visit.id}
-                      className="flex flex-wrap items-center justify-between gap-2 rounded-lg border p-2"
+                      className="flex flex-col gap-2 rounded-lg border p-2 sm:flex-row sm:items-center sm:justify-between"
                     >
-                      <span className="text-sm">
+                      <span className="text-sm truncate">
                         {visit.type === 'visit' ? 'Visita' : 'Incontro'}
                         {visit.property?.address ? ` - ${visit.property.address}` : ''}
                       </span>
@@ -178,27 +178,27 @@ export default async function LeadDetailPage({ params }: LeadDetailPageProps) {
                 return (
                   <div
                     key={m.id}
-                    className="flex flex-wrap items-center justify-between gap-2 rounded-lg border p-3"
+                    className="flex flex-col gap-2 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                       <span
-                        className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold ${getScoreBadgeColor(m.score)}`}
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${getScoreBadgeColor(m.score)}`}
                       >
                         {m.score}
                       </span>
-                      <div>
-                        <p className="text-sm font-medium">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium truncate">
                           {m.property?.address ?? 'Immobile sconosciuto'}
                           {m.property?.city ? `, ${m.property.city}` : ''}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-foreground truncate">
                           {m.property?.price != null ? formatPrice(m.property.price) : ''}
                           {m.property?.sqm != null ? ` - ${m.property.sqm} mq` : ''}
                           {m.property?.rooms != null ? ` - ${m.property.rooms} locali` : ''}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 pl-11 sm:pl-0 shrink-0">
                       <Badge className={mStatus.className}>{mStatus.label}</Badge>
                       <Button variant="ghost" size="sm" asChild>
                         <Link href={`/properties/${m.property_id}`}>

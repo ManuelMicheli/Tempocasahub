@@ -68,19 +68,20 @@ export default async function LeadsPage({ searchParams }: LeadsPageProps) {
     <PageTransition>
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold font-display">Lead</h1>
           <p className="text-sm text-muted-foreground">
             {leadsList.length} {leadsList.length === 1 ? 'risultato' : 'risultati'}
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <LeadsViewToggle />
           <Button asChild>
             <Link href="/leads/new">
               <Plus className="h-4 w-4" />
-              Nuovo Lead
+              <span className="hidden sm:inline">Nuovo Lead</span>
+              <span className="sm:hidden">Nuovo</span>
             </Link>
           </Button>
         </div>

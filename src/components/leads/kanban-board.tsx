@@ -140,7 +140,7 @@ export function KanbanBoard({ leads }: KanbanBoardProps) {
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
       >
-        <div className="flex gap-3 overflow-x-auto pb-4">
+        <div className="-mx-4 px-4 md:mx-0 md:px-0 flex gap-2 md:gap-3 overflow-x-auto pb-4 snap-x snap-mandatory md:snap-none">
           {COLUMNS.map((col) => (
             <KanbanColumn
               key={col.status}
@@ -154,7 +154,7 @@ export function KanbanBoard({ leads }: KanbanBoardProps) {
 
         <DragOverlay dropAnimation={null}>
           {activeLead ? (
-            <div className="w-[264px]">
+            <div className="w-[224px] md:w-[254px] lg:w-[264px]">
               <KanbanCard lead={activeLead} isDragOverlay />
             </div>
           ) : null}

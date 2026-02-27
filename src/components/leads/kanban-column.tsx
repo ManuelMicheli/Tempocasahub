@@ -20,7 +20,7 @@ export function KanbanColumn({ status, title, leads, color }: KanbanColumnProps)
   const leadIds = leads.map((lead) => lead.id);
 
   return (
-    <div className="flex flex-col min-w-[280px] max-w-[280px] flex-shrink-0">
+    <div className="flex flex-col min-w-[240px] max-w-[240px] md:min-w-[270px] md:max-w-[270px] lg:min-w-[280px] lg:max-w-[280px] flex-shrink-0">
       {/* Column header */}
       <div
         className={cn(
@@ -44,7 +44,7 @@ export function KanbanColumn({ status, title, leads, color }: KanbanColumnProps)
           'transition-colors duration-150',
           isOver ? 'bg-accent/50' : 'bg-muted/20',
         )}
-        style={{ maxHeight: 'calc(100vh - 280px)' }}
+        style={{ maxHeight: 'calc(100vh - 300px)', minHeight: '200px' }}
       >
         <SortableContext items={leadIds} strategy={verticalListSortingStrategy}>
           {leads.map((lead) => (
