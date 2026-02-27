@@ -10,7 +10,13 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const agent = await getCurrentAgent();
+  let agent;
+  try {
+    agent = await getCurrentAgent();
+  } catch (e) {
+    console.error('Failed to get current agent:', e);
+    redirect('/login');
+  }
   if (!agent) redirect('/login');
 
   return (
